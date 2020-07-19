@@ -1,0 +1,46 @@
+{
+  "name": "@rheas/middlewares",
+  "version": "0.0.1",
+  "description": "Common middlewares used in the framework",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "keywords": [
+    "rheas",
+    "laravel",
+    "express",
+    "framework",
+    "nodejs",
+    "middlewares",
+    "server",
+    "backend",
+    "api"
+  ],
+  "scripts": {
+    "tsc": "tsc",
+    "test": "jest",
+    "coverage": "jest --coverage",
+    "copypackage": "cp -rf package.json build",
+    "build": "tsc && npm run copypackage",
+    "copypackage_dev": "cp -rf package.json build_dev",
+    "build-dev": "tsc --outDir ./build_dev && npm run copypackage_dev"
+  },
+  "devDependencies": {
+    "@types/jest": "^25.2.1",
+    "@types/node": "^13.13.2",
+    "jest": "^25.4.0",
+    "ts-jest": "^25.4.0",
+    "typescript": "^3.9.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rheas-io/middlewares.git"
+  },
+  "author": "Kalesh Kaladharan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rheas-io/middlewares/issues"
+  },
+  "homepage": "https://github.com/rheas-io/middlewares#readme"
+}
