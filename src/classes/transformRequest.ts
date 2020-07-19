@@ -1,35 +1,44 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.TransformRequest = void 0;
-class TransformRequest {
+import { IRequest } from "@rheas/contracts/core/request";
+
+export class TransformRequest {
+
+    /**
+     * The keys which should be exempted from the transformation.
+     * 
+     * @var array
+     */
+    protected _except: string[];
+
     /**
      * Creates a new request field transformer. For instance, we can
      * trim all the string fields of req, or replace empty strings with
      * null etc.
-     *
+     * 
      * The argument except consists of the field names that has to be
      * exempted from transformations.
-     *
-     * @param except
+     * 
+     * @param except 
      */
-    constructor(except = []) {
+    constructor(except: string[] = []) {
         this._except = except;
     }
+
     /**
      * Transforms the inputs on the request.
-     *
-     * @param req
+     * 
+     * @param req 
      */
-    handle(req) {
+    public handle(req: IRequest) {
         this.transformRequest();
     }
+
     /**
      * Iterate through fields and transform each string fields.
-     *
+     * 
      * @param item Field value
      * @param key
      */
-    transformRequest(item, key) {
+    protected transformRequest(item: any, key?: string): any {
         // If the item is an object, iterate through
         // each property and transform the property.
         if (null !== item && typeof item === "object") {
@@ -38,6 +47,7 @@ class TransformRequest {
             }
             return item;
         }
+
         // If the item is a string, transform the item. Transform 
         // function can be different based on the child class that 
         // extends this base class.
@@ -46,16 +56,17 @@ class TransformRequest {
         }
         return item == null ? null : item;
     }
+
     /**
      * Transforms the request field as required and returns the
      * transformed value.
-     *
+     * 
      * As this is an abstract class, returns the value as it is.
-     *
+     * 
      * @param value
      * @param key
      */
-    transform(value, key) {
+    protected transform(value: string, key?: string): any {
         // Check if the key exists in the exception list. If 
         // exists return the value as it is.
         //
@@ -66,15 +77,16 @@ class TransformRequest {
         }
         return this.clean(value);
     }
+
     /**
      * Extended classes can define the value cleaning within this
-     * function. This is where the actual string transformation takes
+     * function. This is where the actual string transformation takes 
      * place.
-     *
-     * @param value
+     * 
+     * @param value 
      */
-    clean(value) {
+    protected clean(value: string): any {
         return value;
     }
+
 }
-exports.TransformRequest = TransformRequest;
