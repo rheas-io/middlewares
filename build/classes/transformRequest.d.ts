@@ -18,7 +18,8 @@ export declare class TransformRequest {
      */
     constructor(except?: string[]);
     /**
-     * Transforms the inputs on the request.
+     * Transforms the inputs on the request. Request query and
+     * request body fields are transformed.
      *
      * @param req
      */

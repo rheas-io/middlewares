@@ -24,12 +24,14 @@ export class TransformRequest {
     }
 
     /**
-     * Transforms the inputs on the request.
+     * Transforms the inputs on the request. Request query and
+     * request body fields are transformed.
      * 
      * @param req 
      */
     public handle(req: IRequest) {
-        this.transformRequest();
+        this.transformRequest(req.query());
+        this.transformRequest(req.body());
     }
 
     /**
@@ -72,7 +74,7 @@ export class TransformRequest {
         //
         // For example, password and password_confirmation keys
         // should not be trimmed.
-        if (undefined !== key && this._except.includes(key)) {
+        if (null != key && this._except.includes(key)) {
             return value;
         }
         return this.clean(value);
