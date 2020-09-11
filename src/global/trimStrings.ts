@@ -1,5 +1,5 @@
 import { app } from '@rheas/support/helpers';
-import { TrimStrings } from './classes/trimStrings';
+import { TrimStrings } from '../classes/trimStrings';
 import { IRequest } from '@rheas/contracts/core/request';
 import { IRequestHandler } from '@rheas/contracts/routes';
 import { IResponse } from '@rheas/contracts/core/response';

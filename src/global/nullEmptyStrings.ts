@@ -1,5 +1,5 @@
 import { app } from '@rheas/support/helpers';
-import { EmptyStrings } from './classes/emptyStrings';
+import { EmptyStrings } from '../classes/emptyStrings';
 import { IRequest } from '@rheas/contracts/core/request';
 import { IRequestHandler } from '@rheas/contracts/routes';
 import { IResponse } from '@rheas/contracts/core/response';
