@@ -1,4 +1,5 @@
-import { config, abort } from '@rheas/support/helpers';
+import { config } from '@rheas/support/helpers';
+import { abort } from '@rheas/support/helpers/exception';
 import { IRequest } from '@rheas/contracts/core/request';
 import { IRequestHandler } from '@rheas/contracts/routes';
 import { IResponse } from '@rheas/contracts/core/response';

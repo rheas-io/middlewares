@@ -1,6 +1,6 @@
 import { IRequest } from '@rheas/contracts/core/request';
-import { IResponse } from '@rheas/contracts/core/response';
 import { IRequestHandler } from '@rheas/contracts/routes';
+import { IResponse } from '@rheas/contracts/core/response';
 
 /**
  * This middleware adds all the queued cookies to the response
