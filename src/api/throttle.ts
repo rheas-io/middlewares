@@ -8,6 +8,8 @@ import { IResponse } from '@rheas/contracts/core/response';
  * @param res
  * @param next
  */
-async function handler(req: IRequest, res: IResponse, next: IRequestHandler) {}
+async function handler(req: IRequest, res: IResponse, next: IRequestHandler) {
+    return await next(req, res);
+}
 
 export default handler;

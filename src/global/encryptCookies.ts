@@ -16,7 +16,7 @@ import { IResponse } from '@rheas/contracts/core/response';
  */
 async function handler(req: IRequest, res: IResponse, next: IRequestHandler) {
     const cookiesManager = req.cookies();
-    const encrypter: IEncrypter = req.get('encrypter');
+    const encrypter: IEncrypter = req.get("encrypt");
 
     // Decrypt all the incoming cookies.
     Object.values(cookiesManager.incomingCookies()).forEach((cookie) => {
