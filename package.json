@@ -32,11 +32,11 @@
   "devDependencies": {
     "@rheas/contracts": "^0.0.2",
     "@rheas/errors": "^0.0.1",
-    "@rheas/support": "^0.0.3",
+    "@rheas/support": "^0.0.4",
     "@types/jest": "^25.2.1",
     "@types/node": "^13.13.2",
-    "jest": "^25.4.0",
-    "ts-jest": "^25.4.0",
+    "jest": "^26.4.2",
+    "ts-jest": "^26.4.1",
     "typescript": "^3.9.5"
   },
   "repository": {
