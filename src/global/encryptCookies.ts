@@ -16,11 +16,18 @@ import { IResponse } from '@rheas/contracts/core/response';
  */
 async function handler(req: IRequest, res: IResponse, next: IRequestHandler) {
     const cookiesManager = req.cookies();
-    const encrypter: IEncrypter = req.get("encrypt");
+    const encrypter: IEncrypter = req.get('encrypt');
 
     // Decrypt all the incoming cookies.
     Object.values(cookiesManager.incomingCookies()).forEach((cookie) => {
-        cookie.setValue(encrypter.decrypt(cookie.getValue()));
+        try {
+            cookie.setValue(encrypter.decrypt(cookie.getValue()));
+        } catch (err) {
+            // The cookie is possibly tampered, if we are unable to
+            // decrypt it. Set the cookie value to empty and mark it
+            // as expired.
+            cookie.setValue('').expire();
+        }
     });
 
     res = await next(req, res);
