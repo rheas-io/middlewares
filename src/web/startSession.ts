@@ -1,6 +1,7 @@
 import { IRequest } from '@rheas/contracts/core/request';
 import { IRequestHandler } from '@rheas/contracts/routes';
 import { IResponse } from '@rheas/contracts/core/response';
+import { ICookie } from '@rheas/contracts/cookies';
 
 /**
  * This middleware starts the request session. If a session token
@@ -19,10 +20,10 @@ async function handler(req: IRequest, res: IResponse, next: IRequestHandler) {
 
     // Start the session by loading the session data from the
     // datastore.
+    const sessionCookie = req.cookies().get(sessionsManager.getSessionCookieName());
+
     const session = await sessionsManager.startSession(
-        await sessionsManager.loadSession(
-            req.cookies().get(sessionsManager.getSessionCookieName()),
-        ),
+        await sessionsManager.loadSession(sessionCookie?.getValue() || ''),
     );
 
     res = await next(req, res);

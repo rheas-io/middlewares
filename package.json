@@ -1,6 +1,6 @@
 {
   "name": "@rheas/middlewares",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Common middlewares used in the framework",
   "main": "index.js",
   "directories": {
@@ -30,7 +30,7 @@
     "build-dev": "tsc --outDir ./build_dev && npm run copypackage_dev"
   },
   "devDependencies": {
-    "@rheas/contracts": "^0.0.4",
+    "@rheas/contracts": "^0.0.5",
     "@rheas/errors": "^0.0.3",
     "@rheas/support": "^0.0.4",
     "@types/jest": "^25.2.1",
