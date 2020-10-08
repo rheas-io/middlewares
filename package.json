@@ -1,6 +1,6 @@
 {
   "name": "@rheas/middlewares",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Common middlewares used in the framework",
   "main": "index.js",
   "directories": {
