@@ -19,20 +19,7 @@ async function handler(req: IRequest, res: IResponse, next: IRequestHandler) {
     const cookiesManager = req.cookies();
     const encrypter: IEncrypter = req.get('encrypt');
 
-    /**
-     * Encrypts/decrypts all the cookies that are not in the exceptions list. We will not
-     * encrypt XSRF-TOKEN even if it's not in the list. XSRF-TOKEN is only used to
-     * check for CSRF issues. Encrypted or non-encrypted, the end user won't be doing
-     * any check on it and will be simply passing the same value to the server. So,
-     * if we encrypt it, we will have to decrypt it and check. To eliminate the double
-     * work that serves no purpose, we are avoiding it.
-     *
-     * If you find any reason to encrypt it, please let me know.
-     */
-    const app: IApp = req.get('app');
-    const exceptions = new Set(app.exceptions('cookies.encrypt'));
-
-    exceptions.add('XSRF-TOKEN');
+    const exceptions = (req.get('app') as IApp).exceptions('cookies.encrypt');
 
     // Decrypt all the incoming cookies.
     Object.values(cookiesManager.incomingCookies()).forEach(
@@ -61,8 +48,8 @@ async function handler(req: IRequest, res: IResponse, next: IRequestHandler) {
  * @param exceptions collection of cookie names that has to be exempted from decryption
  * @param cookie
  */
-function decryptCookie(encrypter: IEncrypter, exceptions: Set<string>, cookie: ICookie) {
-    if (exceptions.has(cookie.getName())) {
+function decryptCookie(encrypter: IEncrypter, exceptions: string[], cookie: ICookie) {
+    if (exceptions.includes(cookie.getName())) {
         return;
     }
 
@@ -86,12 +73,12 @@ function decryptCookie(encrypter: IEncrypter, exceptions: Set<string>, cookie: I
  * @param exceptions collection of cookie names that has to be exempted from encryption
  * @param cookie
  */
-async function encryptCookie(encrypter: IEncrypter, exceptions: Set<string>, cookie: ICookie) {
-    let cookieValue = cookie.getValue();
-
-    if (!exceptions.has(cookie.getName())) {
-        cookieValue = await encrypter.encrypt(cookie.getValue());
+async function encryptCookie(encrypter: IEncrypter, exceptions: string[], cookie: ICookie) {
+    if (exceptions.includes(cookie.getName())) {
+        return cookie;
     }
+    const cookieValue = await encrypter.encrypt(cookie.getValue());
+
     return cookie.setValue(cookieValue);
 }
 

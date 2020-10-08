@@ -12,7 +12,7 @@ import { IResponse } from '@rheas/contracts/core/response';
  * @param next
  */
 async function handler(req: IRequest, res: IResponse, next: IRequestHandler) {
-    const exceptionKeys: string[] = app().exceptions('EmptyStrings');
+    const exceptionKeys: string[] = app().exceptions('string.empty');
 
     new EmptyStrings(exceptionKeys).handle(req);
 
